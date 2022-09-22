@@ -1,6 +1,9 @@
 package infinitum.lua;
 
 import java.time.Instant;
+import java.util.HashMap;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class LuaCore {
@@ -60,6 +63,12 @@ public class LuaCore {
             return new PCallResult(true, null);
         } catch (Error error){
             return new PCallResult(false, null);
+        }
+    }
+
+    public static void forKVInPairs(HashMap hashMap, Consumer<KeyValuePair> consumer) {
+        for (Object key : hashMap.keySet()) {
+            consumer.accept(new KeyValuePair(key, hashMap.get(key)));
         }
     }
 }
